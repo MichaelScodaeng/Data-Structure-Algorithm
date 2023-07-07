@@ -51,7 +51,7 @@ public class DoublyLinkedList <T>  {
         }
         else
         {
-            addLast(elem)l;
+            addLast(elem);
         }
     }
     public void addFirst(T elem)
@@ -207,13 +207,13 @@ public class DoublyLinkedList <T>  {
     }
     public String toString()
     {
-        String ret = "[ ";
+        StringBuilder ret = new StringBuilder("[ ");
         for(Node<T> trav = head;trav.next!=null;trav=trav.next)
         {
-            ret+=String.valueOf(trav.data)+" ";
+            ret.append(String.valueOf(trav.data)).append(" ");
         }
-        ret+=" ]";
-        return ret;
+        ret.append(" ]");
+        return ret.toString();
 
     }
 
