@@ -1,6 +1,7 @@
 import java.util.LinkedList;
 
 public class StackImplementation<T> {
+    //change to static array
     LinkedList<T> stack;
     public int size= 0;
     public StackImplementation()
@@ -29,6 +30,7 @@ public class StackImplementation<T> {
     public T pop()
     {
         if(isEmpty()) throw new RuntimeException("Stack is already empty");
+        size--;
         return stack.removeLast();
     }
     public T top()
