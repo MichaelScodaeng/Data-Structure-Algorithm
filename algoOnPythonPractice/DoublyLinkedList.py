@@ -26,6 +26,10 @@ class DoublyLinkedList:
             self.head = Node(value)
             self.tail = self.head
             self.size+=1
+        elif (index ==0):
+            self.head.prev = Node(value)
+            self.head.prev.next = self.head
+            self.head = self.head.prev
         elif (index==self.size):
             #print("tail")
             self.tail.next = Node(value)
@@ -44,11 +48,9 @@ class DoublyLinkedList:
                 prev = trav
                 trav = trav.next
                 cnt+=1
-            newNode = Node(value)
-            prev.next = newNode
-            newNode.next = trav
-            trav.prev = newNode
-            newNode.prev = prev
+            prev.next = Node(value)
+            prev.next.next = trav
+            trav.prev = prev.next
             self.size+=1
     def remove(self,value):
         if(self.isEmpty()):
@@ -80,12 +82,14 @@ class DoublyLinkedList:
             raise Exception("Linked is Larger than actual size")
         if(index ==0):
             tmp = self.head.data
-            self.head = None
+            self.head = self.head.next
+            self.head.prev = None
             self.size-=1
             return tmp
         elif(index == self.size-1):
             tmp = self.tail.data
-            self.tail = None
+            self.tail = self.tail.prev
+            self.tail.next = None
             self.size-=1
             return tmp
         else:
@@ -107,15 +111,15 @@ class DoublyLinkedList:
         ret = ""
         trav = self.head
         while(trav.next!=None):
-            print("current trav val: " + str(trav.data))
-            print("current tail val: " + str(self.tail.data))
+            #print("current trav val: " + str(trav.data))
+            #print("current tail val: " + str(self.tail.data))
             if(trav == self.head):
                 ret+=f"[Head: {trav.data}] -> "
             else:
                 ret+=f"[{trav.data}] -> "
             trav = trav.next
 
-            print("Iterated String: "+ ret)
+            #print("Iterated String: "+ ret)
         return ret + f"[Tail: {trav.data}]"
     def display(self):
         print(self.toString())
@@ -127,5 +131,16 @@ if __name__ =="__main__":
     dll.add(30)
     dll.add(35)
     dll.display()
+    dll.insert(15,0)
+    dll.display()
+    dll.insert(25,1)
+    dll.display()
+    dll.pop()
+    dll.display()
+    dll.removeAt(0)
+    dll.display()
+    dll.removeAt(2)
+    dll.display()
+
 
 
